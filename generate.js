@@ -303,6 +303,11 @@ async function run() {
   );
 
   fs.writeFileSync(
+    path.join(__dirname, "time-zones-names.d.ts"),
+    `export type IanaTimezone = ${timeZonesNames.map((tzName) => {return `"${tzName}"`}).join(' | \n')};`
+  )
+
+  fs.writeFileSync(
     path.join(__dirname, "raw-time-zones.json"),
     JSON.stringify(
       orderBy(rawTimeZones, [
